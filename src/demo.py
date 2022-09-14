@@ -8,10 +8,10 @@ from misc import rand_rotation_matrix
 
 
 torch.random.manual_seed(0)
-canvas_size = 512
+canvas_size = 1024
 
-extent = 128
-resolution = 256
+extent = 20
+resolution = 1024
 with torch.no_grad():
     xs = torch.linspace(-extent, extent, steps=resolution)
     ys = torch.linspace(-extent, extent, steps=resolution)
@@ -35,8 +35,8 @@ class Canvas(vispy.app.Canvas):
         self.image = visuals.ImageVisual(get_image(self.t), method='subdivide', cmap='grays')
 
         # scale and center image in canvas
-        s = 512. / max(self.image.size)
-        t = 0.5 * (512. - (self.image.size[0] * s))
+        s = canvas_size / max(self.image.size)
+        t = 0.5 * (canvas_size - (self.image.size[0] * s))
         self.image.transform = STTransform(scale=(s, s), translate=(t, 0))
 
         self.show()
@@ -48,6 +48,11 @@ class Canvas(vispy.app.Canvas):
         self.image.set_data(i)
         self.update()
 
+    def on_mouse_press(self, event):
+        import imageio
+        img = self.render()[:, :, :3]
+        imageio.imwrite('noise.png', img)
+
     def on_resize(self, event):
         # Set canvas viewport and reconfigure visual transforms to match.
         vp = (0, 0, self.physical_size[0], self.physical_size[1])
@@ -56,7 +61,7 @@ class Canvas(vispy.app.Canvas):
 
 
 if __name__ == '__main__':
-    canvas = Canvas(keys='interactive', size=(canvas_size,) * 2)
+    canvas = Canvas(keys='interactive', size=(canvas_size, canvas_size // 2))
     canvas.measure_fps()
     import sys
     if sys.flags.interactive != 1:

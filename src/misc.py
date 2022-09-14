@@ -2,8 +2,20 @@ import numpy as np
 import torch
 
 
+def fill(dims, value):
+    return torch.full(dims, value, dtype=torch.float32)
+
+
+def dot(x, y):
+    return (x * y).sum(axis=-1)
+
+
+def step(edge, x):
+    return torch.sign(x - edge) * .5 + .5
+
+
 def to_float32(x):
-    return (x.type(torch.float64) / (torch.iinfo(x.dtype).max - torch.iinfo(x.dtype).min)).type(torch.float32)
+    return x.type(torch.float32) / (torch.iinfo(x.dtype).max - torch.iinfo(x.dtype).min)
 
 
 def rand_rotation_matrix(deflection=1.0, randnums=None):
