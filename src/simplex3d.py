@@ -1,6 +1,6 @@
 import torch
-from pcg import pcg3d
-from misc import fill, dot, step, to_float32
+from .pcg import pcg3d
+from .misc import fill, dot, step, to_float32
 
 
 # skew constants for 3d simplex functions
