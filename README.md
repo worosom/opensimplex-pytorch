@@ -1,6 +1,11 @@
 # opensimplex_pytorch
 ![](https://media.githubusercontent.com/media/worosom/opensimplex-pytorch/main/assets/noise.png)
 
+## ToDo
+
+- [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)
+- 4d
+
 ## Requirements
 - pytorch
 
