@@ -1,6 +1,6 @@
 import torch
 from .pcg import pcg3d
-from .misc import fill, dot, step, to_float32
+from .misc import fill, dot, step, to_float
 
 
 # skew constants for 3d simplex functions
@@ -48,12 +48,11 @@ def simplex3d(p):
     w = torch.maximum(0.6 - w, torch.zeros((1)))
 
     # calculate surflet components
-
     d = torch.dstack((
-        dot(to_float32(pcg3d(s)), x),
-        dot(to_float32(pcg3d(s + i1)), x1),
-        dot(to_float32(pcg3d(s + i2)), x2),
-        dot(to_float32(pcg3d(s + 1.)), x3)
+        dot(to_float(pcg3d(s)), x),
+        dot(to_float(pcg3d(s + i1)), x1),
+        dot(to_float(pcg3d(s + i2)), x2),
+        dot(to_float(pcg3d(s + 1.)), x3)
     ))
 
     # multiply d by w^4

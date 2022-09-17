@@ -3,15 +3,15 @@ from vispy import visuals
 from vispy.visuals.transforms import STTransform
 
 import torch
-from simplex3d import simplex3d
-from misc import rand_rotation_matrix
+from opensimplex_pytorch.simplex3d import simplex3d
+from opensimplex_pytorch.misc import rand_rotation_matrix
 
 
 torch.random.manual_seed(0)
-canvas_size = 1024
+canvas_size = 512
 
 extent = 20
-resolution = 1024
+resolution = 512
 with torch.no_grad():
     xs = torch.linspace(-extent, extent, steps=resolution)
     ys = torch.linspace(-extent, extent, steps=resolution)
@@ -61,7 +61,7 @@ class Canvas(vispy.app.Canvas):
 
 
 if __name__ == '__main__':
-    canvas = Canvas(keys='interactive', size=(canvas_size, canvas_size // 2))
+    canvas = Canvas(keys='interactive', size=(canvas_size, canvas_size))
     canvas.measure_fps()
     import sys
     if sys.flags.interactive != 1:

@@ -14,8 +14,8 @@ def step(edge, x):
     return torch.sign(x - edge) * .5 + .5
 
 
-def to_float32(x):
-    return x.type(torch.float32) / (torch.iinfo(x.dtype).max - torch.iinfo(x.dtype).min)
+def to_float(x, dtype=torch.float32):
+    return x.type(dtype) / (torch.iinfo(x.dtype).max - torch.iinfo(x.dtype).min)
 
 
 def rand_rotation_matrix(deflection=1.0, randnums=None):
