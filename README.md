@@ -1,5 +1,5 @@
 # opensimplex_pytorch
-![](https://media.githubusercontent.com/media/worosom/opensimplex-pytorch/main/assets/noise.png)
+![](https://media.githubusercontent.com/media/worosom/opensimplex_pytorch/main/assets/noise.png)
 
 ## ToDo
 
