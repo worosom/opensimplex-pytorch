@@ -4,8 +4,8 @@
 ## ToDo
 
 - ~~[PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)~~
-  - [opensimplex_pytorch/examples/profile.py](https://github.com/worosom/opensimplex_pytorch/examples/profile.py)
-- Implement [pcg.py](https://github.com/worosom/opensimplex_pytorch/opensimplex_pytorch/pcg.py) as [PyTorch Custom C++ and CUDA Extensions](https://pytorch.org/tutorials/advanced/cpp_extension.html#writing-a-c-extension)
+  - [opensimplex_pytorch/examples/profile.py](https://github.com/worosom/opensimplex_pytorch/blob/main/examples/profile.py)
+- Implement [pcg.py](https://github.com/worosom/opensimplex_pytorch/blob/main/opensimplex_pytorch/pcg.py) as [PyTorch Custom C++ and CUDA Extensions](https://pytorch.org/tutorials/advanced/cpp_extension.html#writing-a-c-extension)
 - 4d
 
 ## Requirements
