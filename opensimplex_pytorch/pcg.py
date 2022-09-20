@@ -3,6 +3,7 @@ import torch
 
 # http://www.jcgt.org/published/0009/03/02/
 # https://www.shadertoy.com/view/XlGcRh
+@torch.jit.script
 def pcg3d(v):
     v = v.type(torch.int32) * 1664525 + 1013904223
 

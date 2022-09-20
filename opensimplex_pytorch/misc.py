@@ -1,21 +1,25 @@
+from typing import List
 import numpy as np
 import torch
 
 
-def fill(dims, value):
-    return torch.full(dims, value, dtype=torch.float32)
+def fill(dims:List[int], value, device:str='cpu'):
+    return torch.full(dims, value, dtype=torch.float32, device=device)
 
 
+@torch.jit.script
 def dot(x, y):
-    return (x * y).sum(axis=-1)
+    return (x * y).sum(dim=-1)
 
 
+@torch.jit.script
 def step(edge, x):
     return torch.sign(x - edge) * .5 + .5
 
 
-def to_float(x, dtype=torch.float32):
-    return x.type(dtype) / (torch.iinfo(x.dtype).max - torch.iinfo(x.dtype).min)
+@torch.jit.script
+def to_float(x, min=torch.iinfo(torch.int32).min, max=torch.iinfo(torch.int32).max, dtype: torch.dtype=torch.float32):
+    return x.type(dtype) / (max - min)
 
 
 def rand_rotation_matrix(deflection=1.0, randnums=None):
