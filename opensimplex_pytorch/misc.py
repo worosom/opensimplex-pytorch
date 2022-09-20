@@ -4,7 +4,7 @@ import torch
 
 
 def fill(dims:List[int], value, device:str='cpu'):
-    return torch.full(dims, value, dtype=torch.float32, device=device)
+    return torch.full(dims, value, dtype=torch.float16, device=device)
 
 
 @torch.jit.script
@@ -18,7 +18,7 @@ def step(edge, x):
 
 
 @torch.jit.script
-def to_float(x, min=torch.iinfo(torch.int32).min, max=torch.iinfo(torch.int32).max, dtype: torch.dtype=torch.float32):
+def to_float(x, min=torch.iinfo(torch.int32).min, max=torch.iinfo(torch.int32).max, dtype:torch.dtype=torch.float32):
     return x.type(dtype) / (max - min)
 
 

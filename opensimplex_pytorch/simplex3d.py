@@ -64,7 +64,7 @@ class Simplex3D:
         return w, d
     
     def __call__(self, p):
-        p = p.type(torch.float32)
+        p = p.type(torch.float16)
         # 1. find current tetrahedron T and it's four vertices
         # s, s+i1, s+i2, s+1.0 - absolute skewed (integer) coordinates of T vertices
         # x, x1, x2, x3 - unskewed coordinates of p relative to each of T vertices
@@ -73,7 +73,7 @@ class Simplex3D:
         s, x = self.get_s_x(p, self.F3, self.G3)
 
         # calculate i1 and i2
-        edge = torch.zeros((x.shape[0], 3), dtype=torch.float32, device=self.device)
+        edge = torch.zeros((x.shape[0], 3), dtype=torch.float16, device=self.device)
         i1, i2 = self.get_i(x, edge)
 
         # x1, x2, x3
