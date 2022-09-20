@@ -3,15 +3,18 @@ from vispy import visuals
 from vispy.visuals.transforms import STTransform
 
 import torch
-from opensimplex_pytorch.simplex3d import simplex3d
+from opensimplex_pytorch.simplex3d import Simplex3D
 from opensimplex_pytorch.misc import rand_rotation_matrix
 
 
 torch.random.manual_seed(0)
-canvas_size = 512
+canvas_size = 1024
+
+device = torch.device('cuda:0')
+simplex3d = Simplex3D(device)
 
 extent = 20
-resolution = 512
+resolution = 1024
 with torch.no_grad():
     xs = torch.linspace(-extent, extent, steps=resolution)
     ys = torch.linspace(-extent, extent, steps=resolution)
@@ -23,9 +26,9 @@ def get_image(dt):
     with torch.no_grad():
         xyt = torch.dstack((x, y, t + dt))
         flat_xyt = torch.reshape(xyt, (resolution**2, -1))
-        rot_xyt = torch.einsum('in,mn->im', flat_xyt, rotation_matrix)
+        rot_xyt = torch.einsum('in,mn->im', flat_xyt, rotation_matrix).to(device)
         image = simplex3d(rot_xyt)
-        image = torch.reshape(image, (resolution, resolution, -1)).detach().numpy()
+        image = torch.reshape(image, (resolution, resolution, -1)).cpu().numpy()
     return image * .5 + .5
 
 class Canvas(vispy.app.Canvas):
